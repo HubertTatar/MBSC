@@ -3,6 +3,7 @@ rootProject.name = 'mbsc'
 include 'restaurant'
 include 'book'
 include 'user'
+include 'eureka'
 
 //we check if the modules have gradle configuration files
 println(' This project is an asset management POC application')

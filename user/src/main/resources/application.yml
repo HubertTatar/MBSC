@@ -2,6 +2,9 @@
 spring:
   profiles.active: development-h2
 
+server:
+  port: 8082
+
 ---
 spring:
   profiles: development-h2
