@@ -1,0 +1,1 @@
+CREATE INDEX user.users_idx_1 ON user.users(id, version);

@@ -1,0 +1,25 @@
+buildscript {
+
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+description = 'user'
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile('org.hibernate:hibernate-java8:5.0.12.Final')
+    compile('com.h2database:h2:1.4.196')
+    compile ("org.flywaydb:flyway-core:${flywayVersion}")
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

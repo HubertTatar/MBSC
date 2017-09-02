@@ -1,0 +1,14 @@
+rootProject.name = 'mbsc'
+
+include 'restaurant'
+include 'book'
+include 'user'
+
+//we check if the modules have gradle configuration files
+println(' This project is an asset management POC application')
+rootProject.children.each { project ->
+    project.buildFileName = "build.gradle"
+    assert project.projectDir.isDirectory()
+    assert project.buildFile.exists()
+    assert project.buildFile.isFile()
+}

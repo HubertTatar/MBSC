@@ -1,0 +1,1 @@
+CREATE INDEX booking.bookings_idx_1 ON booking.bookings(id, version);
