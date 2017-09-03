@@ -1,20 +1,29 @@
 package com.hutatar.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 class BookingServiceImpl implements BookingService {
 
     private BookingRepository bookingRepository;
+    private DiscoveryClient discoveryClient;
+    private RestaurantClient restaurantClient;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository) {
+    public BookingServiceImpl(BookingRepository bookingRepository, DiscoveryClient discoveryClient, RestaurantClient restaurantClient) {
         this.bookingRepository = bookingRepository;
+        this.discoveryClient = discoveryClient;
+        this.restaurantClient = restaurantClient;
     }
 
     @Override
@@ -60,5 +69,28 @@ class BookingServiceImpl implements BookingService {
     @Override
     public void delete(Booking booking) {
         bookingRepository.delete(booking);
+    }
+
+    @Override
+    public String restaurantInstances() {
+        List<ServiceInstance> restaurant = discoveryClient.getInstances("restaurant");
+        return restaurant
+                .stream()
+                .map(i -> i.getUri().toString())
+                .collect(Collectors.joining(", "));
+    }
+
+    @Override
+    public String userInstances() {
+        List<ServiceInstance> user = discoveryClient.getInstances("user");
+        return user
+                .stream()
+                .map(i -> i.getUri().toString())
+                .collect(Collectors.joining(", "));
+    }
+
+    @Override
+    public Collection<Restaurant> getRestaurants(String name) {
+        return restaurantClient.getRestaurants(name);
     }
 }

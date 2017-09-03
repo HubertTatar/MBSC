@@ -14,10 +14,10 @@ spring:
       path: /db
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:./localDB/restaurantDB;DB_CLOSE_ON_EXIT=FALSE;MV_STORE=FALSE;MVCC=FALSE
+    url: jdbc:h2:file:./localDB/restaurantDB;DB_CLOSE_ON_EXIT=FALSE;MV_STORE=FALSE;MVCC=FALSE
   jpa:
     database-platform: H2
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
       ddl-auto: validate
     properties:
